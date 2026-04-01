@@ -24,6 +24,33 @@ import styles from './root.module.css';
 import './reset.module.css';
 import './global.module.css';
 
+// --- NEW SEO META EXPORT (REMIX V2) ---
+// This handles your ranking for Kerala, Malappuram, and South India.
+export const meta = () => {
+  return [
+    { title: "Webdust | Best Digital Marketing Agency in Kerala & South India" },
+    {
+      name: "description",
+      content: "Webdust is a premier digital marketing agency in Kerala, serving brands across South India. Specializing in performance marketing and web design in Malappuram, we help businesses scale with data-driven results.",
+    },
+    { 
+      name: "keywords", 
+      content: "best digital marketing agency in Kerala, digital marketing agency South India, performance marketing Malappuram, web design Kerala, Webdust digital marketing, SEO agency Malappuram, branding agency Kerala, digital marketing firm Malappuram, Kottakkal digital marketing" 
+    },
+    { property: "og:title", content: "Webdust | Leading Digital Growth Agency in Kerala" },
+    { property: "og:description", content: "World-class performance marketing and web design based in Malappuram, Kerala." },
+    { property: "og:url", content: "https://www.webdust.in" },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "viewport", content: "width=device-width, initial-scale=1" },
+    { charSet: "utf-8" },
+    { name: "robots", content: "index, follow" },
+    { name: "language", content: "English" },
+    { name: "revisit-after", content: "7 days" },
+    { name: "author", content: "Webdust" },
+  ];
+};
+
 export const links = () => [
   {
     rel: 'preload',
@@ -105,25 +132,45 @@ export default function App() {
   return (
     <html lang="en" data-scrolling={isScrolling}>
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="keywords" content="web design, web development, ui ux design, digital marketing, brand identity, custom web applications, kerala web agency, webdust" />
-        <meta name="robots" content="index, follow" />
-        <meta name="language" content="English" />
-        <meta name="revisit-after" content="7 days" />
-        <meta name="author" content="Webdust" />
-        {/* Theme color doesn't support oklch so I'm hard coding these hexes for now */}
+        {/* LOCAL BUSINESS SCHEMA: Tells Google you are in Malappuram, Kerala */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "Webdust",
+              "url": "https://www.webdust.in",
+              "logo": "https://www.webdust.in/favicon.svg",
+              "description": "Best Digital Marketing Agency in Kerala and South India.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Malappuram",
+                "addressRegion": "Kerala",
+                "addressCountry": "IN"
+              },
+              "areaServed": ["Kerala", "South India", "Malappuram", "Kottakkal"],
+              "sameAs": [
+                "https://www.instagram.com/webdust.in"
+              ]
+            }),
+          }}
+        />
+
+        {/* The Meta component now uses the meta function above for all keywords/SEO */}
+        <Meta />
+        <Links />
+        
+        {/* Dynamic theme colors (Untouched) */}
         <meta name="theme-color" content={theme === 'dark' ? '#111' : '#F2F2F2'} />
         <meta
           name="color-scheme"
           content={theme === 'light' ? 'light dark' : 'dark light'}
         />
         <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
-        <Meta />
-        <Links />
         <link rel="canonical" href={canonicalUrl} />
         
-        {/* Google Analytics */}
+        {/* Google Analytics (Untouched) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-H7LZ4FR01J"></script>
         <script dangerouslySetInnerHTML={{
           __html: `
@@ -179,3 +226,4 @@ export function ErrorBoundary() {
     </html>
   );
 }
+
