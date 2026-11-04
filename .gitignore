@@ -1,12 +1,5 @@
-node_modules
-
-/.cache
-/build
-.env
-
-.wrangler
-.dev.vars
-
-public/draco
-storybook-static
-.vercel
+node_modules/
+dist/
+.DS_Store
+data/*.bak
+data/*.tmp
